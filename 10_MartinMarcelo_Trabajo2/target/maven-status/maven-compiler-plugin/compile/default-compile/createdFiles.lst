@@ -1,1 +1,6 @@
-Controlador\controlador.class
+controlador\PersonaC.class
+dao\Conexion.class
+dao\ICRUD.class
+modelo\Persona.class
+controlador\Controlador.class
+dao\PersonaImpl.class

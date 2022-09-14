@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>     
+        <p:growl id="mensaje" showDetail="true" />
+        <p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
+
+        <h:form id="Opciones"  >                     
+            <h3 align="center" style="font-size: 45px;font-weight: bold;color:navy;margin: 20px">LISTADO DE PERSONAS</h3>
+        </h:form>
+
+        <!--        REGISTRO DEL CLIENTE   >-->  
+        <h:form id="form" > 
+
+            <p:panelGrid id="reg" columns="2">
+                <p:outputLabel value="Nombre" for="form"/> 
+                <p:inputText maxlength="50" placeholder="Escribe aqui" value="#{PersonaC.per.nombre}" 
+                             required="true" requiredMessage="Requiere Nombre">
+                    <p:keyFilter regEx="/[A-Z_a-z_ñ_á_é_í_ó_ú_ ]/"/>
+                </p:inputText>
+
+                <p:outputLabel value="Celular" /> 
+                <p:inputText maxlength="9" placeholder="Escribe aqui" value="#{PersonaC.per.celular}" 
+                             required="true" requiredMessage="Requiere Celular">
+                    <p:keyFilter regEx="/[0-9]/" />
+                    <f:validateLength minimum="9"/>
+                </p:inputText>
+
+                <p:outputLabel value="Apellidos" /> 
+                <p:inputText maxlength="60" placeholder="Escribe aqui" value="#{PersonaC.per.apellidos}" 
+                             required="true" requiredMessage="Requiere Apellidos">
+                    <p:keyFilter regEx="/[A-Z_a-z_ñ_á_é_í_ó_ú_ ]/"/>
+                </p:inputText>
+
+                <p:commandButton value="Registrar" 
+                                 actionListener="#{PersonaC.registrar()}"                                    
+                                 update="frmtabla2 form mensaje" 
+                                 icon="pi pi-save">
+                    <f:ajax execute="form" render="frmtabla2"/>
+                </p:commandButton>               
+            </p:panelGrid>
+        </h:form>
+
+
+        <!--        LISTADO DEL CLIENTE   >-->  
+        <h:form id="frmtabla2">
+            <p:dataTable  id="tablaCli" var="tblcli" lazy="false" value="#{PersonaC.listadoPersona}" 
+                          selection="#{PersonaC.per}" rowKey="#{tblcli.id}" selectionMode="single"
+                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} 
+                          {PageLinks} {NextPageLink} {LastPageLink}"
+                          paginator="true" style="margin: 40px" rows="5" styleClass="cli-table" >
+
+
+                <p:column headerText="ID" filterBy="#{tblcli.id}" style="width:2cm ; text-align: center;font-weight: bold">
+                    <h:outputText value="#{tblcli.id} " />
+                </p:column>
+
+                <p:column headerText="Nombres" filterBy="#{tblcli.nombre}" style="width:2cm ; text-align: center ">
+                    <h:outputText value="#{tblcli.nombre} " />
+                </p:column>
+
+                <p:column headerText="Apellidos" filterBy="#{tblcli.apellidos}" style="text-align: center">
+                    <h:outputText value=" #{tblcli.apellidos}" style="text-align: center"  />
+                </p:column>
+
+                <p:column headerText="Apellidos" filterBy="#{tblcli.celular}" style="text-align: center">
+                    <h:outputText value=" #{tblcli.celular}" style="text-align: center"  />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>

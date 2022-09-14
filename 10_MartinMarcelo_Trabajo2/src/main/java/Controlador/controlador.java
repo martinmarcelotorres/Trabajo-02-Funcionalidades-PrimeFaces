@@ -1,4 +1,4 @@
-package Controlador;
+package controlador;
 
 import java.io.Serializable;
 import java.util.logging.Logger;
@@ -8,9 +8,9 @@ import javax.inject.Named;
 @Named
 @ViewScoped
 
-public class controlador implements Serializable {
+public class Controlador implements Serializable {
 
-    private static final Logger LOG = Logger.getLogger(controlador.class.getName());
+    private static final Logger LOG = Logger.getLogger(Controlador.class.getName());
 
     private String texto;
     private String texto2;
